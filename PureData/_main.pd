@@ -1,0 +1,44 @@
+#N canvas 530 94 584 503 10;
+#X obj 135 149 xcorr~;
+#N canvas 0 22 450 278 (subpatch) 0;
+#X array array1 64 float 3;
+#A 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;
+#X coords 0 1 64 -1 200 140 1;
+#X restore 344 207 graph;
+#X obj 51 36 adc~ 1 2;
+#X obj 135 202 tabwrite~ array1;
+#X obj 263 131 loadbang;
+#X obj 263 185 metro 100;
+#X obj 263 157 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X obj 83 283 array max array1;
+#X obj 83 202 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X obj 176 398 print dif;
+#X floatatom 176 370 5 0 0 0 - - -, f 5;
+#X msg 413 95 \; pd dsp 1 \;;
+#X msg 263 356 connect localhost 3000;
+#X msg 263 384 send \$1;
+#X obj 263 412 netsend -u;
+#X msg 413 124 \; pd dsp 0 \;;
+#X obj 176 326 - 32;
+#X obj 51 93 expr~ if ($v1 > 0.1 \, $v1 \, 0) \; if ($v2 > 0.1 \, $v2
+\, 0);
+#X connect 0 0 3 0;
+#X connect 2 0 17 0;
+#X connect 2 1 17 1;
+#X connect 4 0 6 0;
+#X connect 4 0 12 0;
+#X connect 5 0 3 0;
+#X connect 5 0 8 0;
+#X connect 6 0 5 0;
+#X connect 7 1 16 0;
+#X connect 8 0 7 0;
+#X connect 10 0 9 0;
+#X connect 10 0 13 0;
+#X connect 12 0 14 0;
+#X connect 13 0 14 0;
+#X connect 16 0 10 0;
+#X connect 17 0 0 0;
+#X connect 17 1 0 1;
